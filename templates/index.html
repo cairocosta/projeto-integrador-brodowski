@@ -1,15 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>{% block title %} Bem vindo ao serviço de postagens! {% endblock %}</h1>
-    {% for post in posts %}
-        <a href="{{ url_for('post', post_id=post['id']) }}">
-            <h2>{{ post['title'] }}</h2>
-        </a>
-        <span class="badge badge-primary">{{ post['created'] }}</span>
-        <a href="{{ url_for('edit', id=post['id']) }}">
-            <span class="badge badge-warning">Editar</span>
-        </a>
-        <hr>
-    {% endfor %}
+    <div class="container">
+        <h1>{% block title %} Livroteca {% endblock %}</h1>
+        <p>Seja bem-vindo!</p>
+        <p>Aqui você aprenderá orientações e dicas simples e diretas para que você comece o quanto antes a colocar em prática estratégias de interação, conversas e leitura em voz alta com crianças.</p>
+        <p>Os materias de trabalho livros, links e vídeos podem ser encontrados gratuitamente:</p><a class="text-decoration-none" target="_blank" href="http://alfabetizacao.mec.gov.br/contapramim">MEC - Conta pra mim </a>
+    </div>
 {% endblock %}

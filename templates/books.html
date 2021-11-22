@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>{% block title %} Livros {% endblock %}</h1>
+    {% for book in books %}
+        <div class="container">
+            <a class="text-decoration-none" target="_blank" href="{{ book['url'] }}">
+                <h2 class="text-danger">{{ book['title'] }}</h2>
+            </a>
+            <strong>Categoria: </strong><span class="badge bg-light">{{ book['category'] }}</span>
+        </div>
+        <hr>
+    {% endfor %}
+{% endblock %}

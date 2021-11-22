@@ -18,10 +18,33 @@ class Posts(db.Model):
     title = db.Column(db.String(80), nullable=False)
     content = db.Column(db.String(200), nullable=False)
 
+class Books(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(80), nullable=False)
+    category = db.Column(db.String(80), nullable=False)
+    url = db.Column(db.String(255), nullable=False)
+
 @app.route('/')
 def index():
+    return render_template('index.html')
+
+@app.route('/books')
+def books():
+    books = Books.query.all()
+    return render_template('books.html', books=books)
+
+@app.route('/videos')
+def videos():
+    return render_template('videos.html')
+
+@app.route('/sounds')
+def sounds():
+    return render_template('sounds.html')
+
+@app.route('/coments')
+def coments():
     posts = Posts.query.all()
-    return render_template('index.html', posts=posts)
+    return render_template('coments.html', posts=posts)
 
 def get_post(post_id):
     post = Posts.query.filter_by(id=post_id).first()
@@ -46,7 +69,7 @@ def create():
             post = Posts(title=title, content=content)
             db.session.add(post)
             db.session.commit()
-            return redirect(url_for('index'))
+            return redirect(url_for('coments'))
 
     return render_template('create.html')
 
@@ -65,7 +88,7 @@ def edit(id):
             post.content = content
             db.session.commit()
             db.session.commit()
-            return redirect(url_for('index'))
+            return redirect(url_for('coments'))
 
     return render_template('edit.html', post=post)
 
@@ -75,6 +98,6 @@ def delete(id):
     db.session.delete(post)
     db.session.commit()
     flash('"{}" foi apagado com sucesso!'.format(post.title))
-    return redirect(url_for('index'))
+    return redirect(url_for('coments'))
 
 
